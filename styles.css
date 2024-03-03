@@ -17,6 +17,7 @@ body {
   background-color: rgb(246, 167, 167);
 }
 
+
 *:focus {
   outline: none;
 }
@@ -129,4 +130,23 @@ footer {
 
 .text-center {
   text-align: center;
+}
+
+table {
+  width: 100%; /* Définir la largeur de la table à 100% pour qu'elle occupe toute la largeur disponible */
+  border-collapse: collapse; /* Fusionner les bordures de la table */
+}
+
+table, th, td {
+  border: 1px solid black; /* Ajouter une bordure à la table et à ses cellules */
+}
+
+th, td {
+  padding: 10px; /* Ajouter un espacement intérieur aux cellules pour les rendre plus aérées */
+  text-align: center; /* Centrer le texte dans les cellules */
+  font-size: 16px; /* Ajuster la taille de la police pour une meilleure lisibilité */
+}
+
+img {
+  max-width: 100px; /* Limiter la largeur des images pour qu'elles ne dépassent pas la largeur de la table */
 }
