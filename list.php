@@ -3,15 +3,24 @@
 -->
 <?php
 require_once("head.php");
-?>
-<pre>
-    &lt;
-    A REMPLACER PAR VOTRE CODE POUR CHARGER ET AFFICHER DANS UN TABLEAU LA LISTE DES POKEMONS PAR LEUR NOM.
-    CHAQUE POKEMON DOIT ETRE CLIQUABLE POUR NAVIGUER SUR UNE PAGE OU L'ON AFFICHE SON IMAGE ET L'ENSEMBLE DE SES CARACTERISTIQUES 
-    &gt;
-    </pre>
+require_once("database-connection.php");
 
+$query = $databaseConnection->query("SELECT pokemon.IdPokemon, pokemon.NomPokemon, pokemon.urlPhoto, typepokemon.libelleType FROM pokemon INNER JOIN typepokemon ON pokemon.IdTypePokemon = typepokemon.IdType ORDER BY pokemon.IdPokemon");
 
-<?php
+if (!$query) {
+    echo "Erreur SQL : " . $databaseConnection->error;
+} else {
+    echo '<table>';
+    while ($data = $query->fetch_assoc()) {
+        echo '<tr>';
+        echo '<td>' . $data['IdPokemon'] . '</td>';
+        echo '<td><img src="' . $data['urlPhoto'] . '" alt="' . $data['NomPokemon'] . '"></td>';
+        echo '<td>' . $data['NomPokemon'] . '</td>';
+        echo '<td>' . $data['libelleType'] . '</td>';
+        echo '</tr>';
+    }
+    echo '</table>';
+}
+
 require_once("footer.php");
 ?>

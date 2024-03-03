@@ -9,9 +9,13 @@ global $databaseConnection;
 
 /* A COMPLETER : remplacer les paramètres pour se connecter à votre base de données de pokémon */
 $databaseConnection = mysqli_connect(
-    'URL de la machine hébergeant votre base de données',
-    "nom de l'utilisateur",
-    "mot de passe de l'utilisateur",
-    "nom de la base de données à laquelle se connecter",
-    "numéro de port ouvert"
+    'localhost',
+    "root",
+    null,
+    "pokemon",
+    3306
 );
+if (!$databaseConnection) {
+    // en cas d'erreur, la fonction mysqli_connect_error() indique la cause de l'échec de la connexion
+    throw new RuntimeException("Cannot connect to the database. Cause : " . mysqli_connect_error());
+    }
