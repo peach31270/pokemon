@@ -16,7 +16,7 @@ if (!$queryTypes) {
         echo '<table>';
 
         // Récupérer et afficher les Pokémon de ce type
-        $queryPokemon = $databaseConnection->query("SELECT pokemon.IdPokemon, pokemon.NomPokemon, pokemon.urlPhoto FROM pokemon INNER JOIN typepokemon ON pokemon.IdTypePokemon = typepokemon.IdType WHERE typepokemon.libelleType = '" . $type['libelleType'] . "' ORDER BY pokemon.NomPokemon");
+        $queryPokemon = $databaseConnection->query("SELECT pokemon.IdPokemon, pokemon.NomPokemon, pokemon.urlPhoto, typepokemon.libelleType AS 'Type 1', typepokemon2.libelleType AS 'Type 2' FROM pokemon INNER JOIN typepokemon ON pokemon.IdTypePokemon = typepokemon.IdType LEFT JOIN typepokemon as typepokemon2 ON pokemon.idSecondTypePokemon = typepokemon2.IdType WHERE typepokemon.libelleType = '" . $type['libelleType'] . "' ORDER BY pokemon.NomPokemon");
 
         if (!$queryPokemon) {
             echo "Erreur SQL : " . $databaseConnection->error;
@@ -26,6 +26,8 @@ if (!$queryTypes) {
                 echo '<td>' . $pokemon['IdPokemon'] . '</td>';
                 echo '<td><a href="pokemon_details.php?id=' . $pokemon['IdPokemon'] . '"><img src="' . $pokemon['urlPhoto'] . '" alt="' . $pokemon['NomPokemon'] . '"></a></td>';
                 echo '<td><a href="pokemon_details.php?id=' . $pokemon['IdPokemon'] . '">' . $pokemon['NomPokemon'] . '</a></td>';
+                echo '<td>' . $pokemon['Type 1'] . '</td>';
+                echo '<td>' . $pokemon['Type 2'] . '</td>';
                 echo '</tr>';
             }
         }
