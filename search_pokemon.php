@@ -23,7 +23,7 @@ if (isset($_GET['q'])) {
         echo '</table>';
     }
 } else {
-    echo "Aucun terme de recherche fourni.";
+    echo "Aucun terme fourni.";
 }
 
 require_once("footer.php");
