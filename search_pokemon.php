@@ -8,7 +8,7 @@ require_once("database-connection.php");
 if (isset($_GET['q'])) {
     $term = $_GET['q']; // Récupérer le terme de recherche à partir de l'URL
 
-    $query = $databaseConnection->query("SELECT * FROM pokemon WHERE NomPokemon LIKE '%" . $term . "%' ORDER BY NomPokemon");
+    $query = $databaseConnection->query("SELECT * FROM pokemon WHERE NomPokemon LIKE '" . $term . "%' ORDER BY NomPokemon");
 
     if (!$query) {
         echo "Erreur SQL : " . $databaseConnection->error;
