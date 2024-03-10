@@ -23,6 +23,15 @@
                 <input id="q" name="q" type="search" placeholder="Rechercher un pokémon"><button type="submit">🔎</button>
             </span>
         </form>
+        <?php
+        if(isset($_SESSION['prenom']) && isset($_SESSION['nom'])) {
+            $firstName = $_SESSION['prenom'];
+            $lastName = $_SESSION['nom'];
+            echo "Bonjour $firstName $lastName";
+            }else{
+                echo "Bonjour";
+            }
+            ?>
     </header>
 
     <div id="main-wrapper">
