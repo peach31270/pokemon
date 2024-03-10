@@ -24,6 +24,7 @@
             </span>
         </form>
         <?php
+        require_once("check-Connection.php");
         if(isset($_SESSION['prenom']) && isset($_SESSION['nom'])) {
             $firstName = $_SESSION['prenom'];
             $lastName = $_SESSION['nom'];

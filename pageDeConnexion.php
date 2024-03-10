@@ -4,9 +4,13 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $login = $_POST['login'];
     $password = $_POST['password'];
-    $user = $databaseConnection->query("SELECT * FROM Utilisateur WHERE login = '$login'")->fetch_assoc();
+    $stmt = $databaseConnection->prepare("SELECT * FROM Utilisateur WHERE login = ?");
+    $stmt->bind_param("s", $login);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
     if ($user && password_verify($password, $user['hashMotDePasse'])) {
-        $_SESSION['IdUtilisateur'] = $user['IdUtilisateur'];
+        $_SESSION['idUserLoggedIn'] = $user['IdUtilisateur'];
         $_SESSION['nom'] = $user['nom'];
         $_SESSION['prenom'] = $user['prenom'];
         header("Location: index.php");
