@@ -16,7 +16,13 @@ if (!$queryTypes) {
         echo '<table>';
 
         // Récupérer et afficher les Pokémon de ce type
-        $queryPokemon = $databaseConnection->query("SELECT pokemon.IdPokemon, pokemon.NomPokemon, pokemon.urlPhoto, typepokemon.libelleType AS 'Type 1', typepokemon2.libelleType AS 'Type 2' FROM pokemon INNER JOIN typepokemon ON pokemon.IdTypePokemon = typepokemon.IdType LEFT JOIN typepokemon as typepokemon2 ON pokemon.idSecondTypePokemon = typepokemon2.IdType WHERE typepokemon.libelleType = '" . $type['libelleType'] . "' ORDER BY pokemon.NomPokemon");
+        $queryPokemon = $databaseConnection->query("SELECT pokemon.IdPokemon, pokemon.NomPokemon,pokemon.urlPhoto,type1.libelleType AS 'Type 1', type2.libelleType AS 'Type 2' 
+    FROM pokemon 
+    INNER JOIN typepokemon AS type1 ON pokemon.IdTypePokemon = type1.IdType 
+    LEFT JOIN typepokemon AS type2 ON pokemon.IdSecondTypePokemon = type2.IdType 
+    WHERE type1.libelleType = '" . $type['libelleType'] . "' OR type2.libelleType = '" . $type['libelleType'] . "'
+    ORDER BY pokemon.NomPokemon
+");
 
         if (!$queryPokemon) {
             echo "Erreur SQL : " . $databaseConnection->error;
